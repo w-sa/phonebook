@@ -11,9 +11,18 @@ const createEntry = (object: Interfaces.Person) => {
   return request.then((response) => response.data);
 };
 
-const updateEntry = () => {};
+const updateEntry = (entryId: string, newNumber: string, name: string) => {
+  const request = axios.put(`${BASE_URL}/${entryId}`, {
+    name: name,
+    number: newNumber,
+  });
+  return request.then((response) => response.data);
+};
 
-const deleteEntry = () => {};
+const deleteEntry = (entryId: string) => {
+  const request = axios.delete(`${BASE_URL}/${entryId}`);
+  return request.then((response) => response.data);
+};
 
 export default {
   getAllEntries,

@@ -12,12 +12,29 @@ const EntryForm = ({ setEntries, entries }: Props) => {
   const [newNumber, setNewNumber] = useState("");
 
   const updatePersons = (personName: string, personNumber: string) => {
-    if (
-      entries.some(
-        (person) => person.name.toLowerCase() === personName.toLowerCase()
-      )
-    ) {
-      alert(`An entry for ${personName} already exists.`);
+    const existingEntry = entries.find(
+      (person) => person.name.toLowerCase() === personName.toLowerCase()
+    );
+
+    if (existingEntry && personNumber.length > 0) {
+      if (
+        window.confirm(
+          `${personName} is already in the phonebook, replace the old number with a new one?`
+        )
+      ) {
+        entryService
+          .updateEntry(existingEntry.id, newNumber, newName)
+          .then((entryData) => {
+            const updatedEntry = entryData;
+            const updatedEntries = entries.filter(
+              (entry) => entry.name.toLowerCase() !== newName.toLowerCase()
+            );
+            setEntries(updatedEntries.concat(updatedEntry));
+          });
+      }
+      return;
+    } else if (existingEntry) {
+      alert(`${personName} is already entered into the phonebook.`);
       return;
     }
 

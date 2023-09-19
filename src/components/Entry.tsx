@@ -1,13 +1,20 @@
 import * as Interfaces from "../interfaces";
+import entryService from "../services/entries";
 
 interface Props {
-  entry: Interfaces.Person;
+  entry: Interfaces.PersonWithId;
+  onDelete: (id: string, name: string) => void;
 }
 
-const Entry = ({ entry }: Props) => {
+const Entry = ({ entry, onDelete }: Props) => {
+  const handleDeletion = () => {
+    onDelete(entry.id, entry.name);
+  };
+
   return (
     <li>
-      {entry.name} {entry.number}
+      {entry.name} {entry.number}{" "}
+      <button onClick={handleDeletion}>Delete</button>
     </li>
   );
 };

@@ -6,7 +6,7 @@ import Entries from "./components/Entries";
 import Filter from "./components/Filter";
 
 const App = () => {
-  const [persons, setPersons] = useState<Interfaces.Person[]>([]);
+  const [persons, setPersons] = useState<Interfaces.PersonWithId[]>([]);
   const [renderedContent, setRenderedContent] = useState(persons);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const App = () => {
       <h2>Add a new entry:</h2>
       <EntryForm setEntries={setPersons} entries={persons} />
       <h2>Numbers</h2>
-      <Entries entries={renderedContent} />
+      <Entries entries={renderedContent} persons={persons} setPersons={setPersons} />
     </div>
   );
 };
