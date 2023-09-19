@@ -5,10 +5,15 @@ interface Props {
   entries: Interfaces.PersonWithId[];
   persons: Interfaces.PersonWithId[];
   setPersons: (persons: Interfaces.PersonWithId[]) => void;
+  createNotification: (messageText: string, isError: boolean) => void;
 }
 
-const Entries = ({ entries, persons, setPersons }: Props) => {
-  
+const Entries = ({
+  entries,
+  persons,
+  setPersons,
+  createNotification,
+}: Props) => {
   const deleteEntry = (entryId: string, name: string) => {
     if (window.confirm(`Delete ${name}?`)) {
       entryService
@@ -18,6 +23,7 @@ const Entries = ({ entries, persons, setPersons }: Props) => {
             (person) => person.id !== entryId
           );
           setPersons(updatedPersons);
+          createNotification(`${name} was successfully deleted.`, false);
         })
         .catch((error) => {
           console.error("... something went wrong", error);

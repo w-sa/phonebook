@@ -5,9 +5,10 @@ import entryService from "../services/entries";
 interface Props {
   setEntries: (persons: Interfaces.PersonWithId[]) => void;
   entries: Interfaces.PersonWithId[];
+  createNotification: (messageText: string, isError: boolean) => void;
 }
 
-const EntryForm = ({ setEntries, entries }: Props) => {
+const EntryForm = ({ setEntries, entries, createNotification }: Props) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -30,6 +31,9 @@ const EntryForm = ({ setEntries, entries }: Props) => {
               (entry) => entry.name.toLowerCase() !== newName.toLowerCase()
             );
             setEntries(updatedEntries.concat(updatedEntry));
+          })
+          .catch((error) => {
+            console.error("... something went wrong", error);
           });
       }
       return;
@@ -46,6 +50,7 @@ const EntryForm = ({ setEntries, entries }: Props) => {
     entryService
       .createEntry(newPerson)
       .then((newPersonWithId) => setEntries(entries.concat(newPersonWithId)));
+    createNotification(`${newName} was successfully added`, false);
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {

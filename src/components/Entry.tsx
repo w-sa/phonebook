@@ -1,5 +1,4 @@
 import * as Interfaces from "../interfaces";
-import entryService from "../services/entries";
 
 interface Props {
   entry: Interfaces.PersonWithId;
