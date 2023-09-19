@@ -1,8 +1,8 @@
 import * as Interfaces from "../interfaces";
 
 interface Props {
-  entries: Interfaces.Person[];
-  onFilterChange: (content: Interfaces.Person[]) => void;
+  entries: Interfaces.PersonWithId[];
+  onFilterChange: (content: Interfaces.PersonWithId[]) => void;
 }
 
 const Filter = ({ entries, onFilterChange }: Props) => {

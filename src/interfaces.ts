@@ -3,4 +3,8 @@ export interface Person {
   number: string;
 }
 
+export interface PersonWithId extends Person {
+  id: string;
+}
+
 export * from "./interfaces";

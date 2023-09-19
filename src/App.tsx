@@ -10,7 +10,7 @@ const App = () => {
   const [renderedContent, setRenderedContent] = useState(persons);
 
   useEffect(() => {
-    entryService.getAll().then((response) => {
+    entryService.getAllEntries().then((response) => {
       setPersons(response.data);
     });
   }, []);

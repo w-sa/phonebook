@@ -1,9 +1,10 @@
 import { useState } from "react";
 import * as Interfaces from "../interfaces";
+import entryService from "../services/entries";
 
 interface Props {
-  setEntries: (persons: Interfaces.Person[]) => void;
-  entries: Interfaces.Person[];
+  setEntries: (persons: Interfaces.PersonWithId[]) => void;
+  entries: Interfaces.PersonWithId[];
 }
 
 const EntryForm = ({ setEntries, entries }: Props) => {
@@ -24,7 +25,10 @@ const EntryForm = ({ setEntries, entries }: Props) => {
       name: personName,
       number: personNumber,
     };
-    setEntries(entries.concat(newPerson));
+
+    entryService
+      .createEntry(newPerson)
+      .then((newPersonWithId) => setEntries(entries.concat(newPersonWithId)));
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {

@@ -2,7 +2,7 @@ import * as Interfaces from "../interfaces";
 import Entry from "./Entry";
 
 interface Props {
-  entries: Interfaces.Person[];
+  entries: Interfaces.PersonWithId[];
 }
 
 const Entries = ({ entries }: Props) => {
@@ -10,7 +10,7 @@ const Entries = ({ entries }: Props) => {
     <div>
       <ul>
         {entries.map((entry) => (
-          <Entry key={entry.name} entry={entry} />
+          <Entry key={entry.id} entry={entry} />
         ))}
       </ul>
     </div>
