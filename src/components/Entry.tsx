@@ -3,6 +3,7 @@ import * as Interfaces from "../interfaces";
 interface Props {
   entry: Interfaces.PersonWithId;
   onDelete: (id: string, name: string) => void;
+
 }
 
 const Entry = ({ entry, onDelete }: Props) => {

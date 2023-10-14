@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as Interfaces from "../interfaces";
-const BASE_URL = "http://localhost:3001/persons";
+const BASE_URL = "http://localhost:3001/api/persons";
 
 const getAllEntries = () => {
   return axios.get(BASE_URL);
